@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Mindsafi</title>
+  <rect width="32" height="32" rx="7" fill="#002e6d"/>
+  <circle cx="16" cy="16" r="12.4" fill="#ffe600"/>
+  <circle cx="16" cy="16" r="8.55" fill="#002e6d"/>
+  <path fill="#ffe600" d="M16 23.15c0 0-5.35-3.55-5.35-6.55 0-1.85 1.4-3.2 3.05-3.2 1.05 0 1.9.55 2.3 1.35.4-.8 1.25-1.35 2.3-1.35 1.65 0 3.05 1.35 3.05 3.2 0 3-5.35 6.55-5.35 6.55z"/>
+</svg>
