@@ -10,6 +10,7 @@ const Team = () => {
       name: "Sango Fati",
       role: "Co-Founder & Senior Counsellor",
       image: Fati,
+      focusTop: true,
     },
     {
       name: "Patrick Kabahigi Sibomana",
@@ -17,59 +18,52 @@ const Team = () => {
       image: Patrick,
     },
     {
-      name: "Prince Iranzi",
-      role: "Marketing Manager & CTO",
-      image: Prince,
+      name: "Clovis Ganza",
+      role: "Chief Finance Officer",
+      image: Clovis,
+      focusTop: true,
     },
     {
       name: "Umutoni Yvette",
-      role: "Chief of Finance",
+      role: "Clinical Psychologist",
       image: Yvette,
     },
     {
-      name: "Clovis Ganza",
-      role: "Clinical Psychologist",
-      image: Clovis,
+      name: "Prince Iranzi",
+      role: "IT and Communications Manager",
+      image: Prince,
     },
   ];
 
   return (
-    <section id="team" className="py-20 bg-gray-50 min-h-0">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+    <section id="team" className="bg-gray-200 py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <h2 className="mb-14 text-center text-3xl font-bold text-gray-900 sm:mb-16">
           Meet Our Dedicated Team
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
-          {teamMembers.map((member, index) => (
-            <div
-              key={index}
-              className={`bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 ${
-                index >= 3 ? "md:col-span-1 lg:col-span-1" : ""
-              }`}
-              style={
-                index >= 3 ? { gridColumn: index === 3 ? "1" : "2" } : undefined
-              }
+        <div className="flex flex-wrap justify-center gap-6">
+          {teamMembers.map((member) => (
+            <article
+              key={member.name}
+              className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
             >
-              <div className="relative h-64">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className={`w-full h-full object-cover ${
-                    member.name === "Clovis Ganza" ||
-                    member.name === "Sango Fati"
-                      ? "object-top"
-                      : ""
-                  }`}
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <img
+                src={member.image}
+                alt={member.name}
+                className={`h-64 w-full object-cover ${
+                  member.focusTop ? "object-top" : "object-center"
+                }`}
+              />
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-gray-900">
                   {member.name}
                 </h3>
-                <p className="text-blue-900 font-medium">{member.role}</p>
+                <p className="mt-1 text-sm font-medium text-[#002e6d]">
+                  {member.role}
+                </p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

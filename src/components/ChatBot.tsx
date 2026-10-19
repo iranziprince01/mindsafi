@@ -42,29 +42,32 @@ const ChatBot = () => {
   return (
     <>
       {/* Chat Button */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 bg-[#002e6d] text-white p-4 rounded-full shadow-lg hover:bg-[#003d91] transition-colors z-50"
-      >
-        <MessageSquare className="w-6 h-6" />
-      </button>
+      {!isOpen && (
+        <button
+          onClick={() => setIsOpen(true)}
+          aria-label="Open support chat"
+          className="fixed bottom-6 right-6 z-50 rounded-full bg-[#002e6d] p-4 text-white shadow-lg transition-colors hover:bg-[#003d91]"
+        >
+          <MessageSquare className="h-5 w-5" />
+        </button>
+      )}
 
-      {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-96 bg-white rounded-xl shadow-2xl z-50">
+        <div className="fixed inset-x-4 bottom-4 z-50 flex max-h-[80vh] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl sm:inset-x-auto sm:bottom-6 sm:right-6 sm:w-96">
           {/* Header */}
           <div className="flex items-center justify-between p-4 bg-[#002e6d] text-white rounded-t-xl">
             <h3 className="font-semibold">{t('chatbot.title')}</h3>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white hover:text-[#ffe600] transition-colors"
+              aria-label="Close support chat"
+              className="min-h-0 text-white transition-colors hover:text-[#ffe600]"
             >
-              <X className="w-5 h-5" />
+              <X className="h-5 w-5" />
             </button>
           </div>
 
           {/* Messages */}
-          <div className="h-96 overflow-y-auto p-4 space-y-4">
+          <div className="h-80 space-y-4 overflow-y-auto p-4">
             {messages.map((message, index) => (
               <div
                 key={index}

@@ -1,11 +1,11 @@
 import { Building, CreditCard, Heart, Phone, Wallet } from "lucide-react";
 import React, { useState } from "react";
-import Footer from "../components/Footer";
 
 const Donate = () => {
   const [amount, setAmount] = useState("");
   const [customAmount, setCustomAmount] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [notice, setNotice] = useState("");
 
   const predefinedAmounts = ["10", "25", "50", "100", "250", "500"];
 
@@ -16,20 +16,27 @@ const Donate = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Processing donation:", {
-      amount: amount || customAmount,
-      paymentMethod,
-    });
+    const chosen = amount || customAmount;
+    if (!chosen || Number(chosen) <= 0) {
+      setNotice("Choose an amount to continue.");
+      return;
+    }
+    if (paymentMethod !== "mtn") {
+      setNotice("MTN Mobile Money is the available option right now.");
+      return;
+    }
+    setNotice(
+      `Send $${chosen} to one of the MTN numbers above, then email the transaction reference to info.mindsafi@gmail.com.`
+    );
   };
 
   return (
-    <>
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
-        <div className="bg-blue-900 text-white py-24">
+        <div className="bg-[#002e6d] pb-28 pt-36 text-white sm:pb-32">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <Heart className="w-16 h-16 mx-auto mb-6 text-orange-500" />
+              <Heart className="mx-auto mb-4 h-8 w-8 text-[#ffe600]" />
               <h1 className="text-4xl font-bold mb-4">
                 Make a Difference Today
               </h1>
@@ -55,8 +62,8 @@ const Donate = () => {
                       type="button"
                       className={`p-4 rounded-lg border-2 transition-all ${
                         amount === preset
-                          ? "border-orange-500 bg-orange-50"
-                          : "border-gray-200 hover:border-orange-500"
+                          ? "border-[#002e6d] bg-[#002e6d]/5"
+                          : "border-gray-200 hover:border-[#002e6d]"
                       }`}
                       onClick={() => {
                         setAmount(preset);
@@ -79,7 +86,7 @@ const Donate = () => {
                       setAmount("");
                     }}
                     placeholder="Enter amount"
-                    className="w-full p-4 border-2 border-gray-200 rounded-lg focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+                    className="w-full p-4 border-2 border-gray-200 rounded-lg focus:border-[#002e6d] focus:ring-2 focus:ring-[#002e6d]/20"
                   />
                 </div>
               </div>
@@ -92,12 +99,12 @@ const Donate = () => {
                     type="button"
                     className={`p-6 rounded-lg border-2 transition-all flex flex-col items-center ${
                       paymentMethod === "mtn"
-                        ? "border-orange-500 bg-orange-50"
-                        : "border-gray-200 hover:border-orange-500"
+                        ? "border-[#002e6d] bg-[#002e6d]/5"
+                        : "border-gray-200 hover:border-[#002e6d]"
                     }`}
                     onClick={() => setPaymentMethod("mtn")}
                   >
-                    <Phone className="w-8 h-8 mb-2 text-blue-900" />
+                    <Phone className="w-8 h-8 mb-2 text-[#002e6d]" />
                     <span>MTN Mobile Money</span>
                   </button>
                   <button
@@ -105,7 +112,7 @@ const Donate = () => {
                     className="p-6 rounded-lg border-2 transition-all flex flex-col items-center border-gray-200 opacity-50 cursor-not-allowed"
                     disabled
                   >
-                    <CreditCard className="w-8 h-8 mb-2 text-blue-900" />
+                    <CreditCard className="w-8 h-8 mb-2 text-[#002e6d]" />
                     <span>Credit Card</span>
                     <span className="text-xs text-gray-500 mt-1">
                       Coming Soon
@@ -116,7 +123,7 @@ const Donate = () => {
                     className="p-6 rounded-lg border-2 transition-all flex flex-col items-center border-gray-200 opacity-50 cursor-not-allowed"
                     disabled
                   >
-                    <Wallet className="w-8 h-8 mb-2 text-blue-900" />
+                    <Wallet className="w-8 h-8 mb-2 text-[#002e6d]" />
                     <span>PayPal</span>
                     <span className="text-xs text-gray-500 mt-1">
                       Coming Soon
@@ -127,7 +134,7 @@ const Donate = () => {
                     className="p-6 rounded-lg border-2 transition-all flex flex-col items-center border-gray-200 opacity-50 cursor-not-allowed"
                     disabled
                   >
-                    <Building className="w-8 h-8 mb-2 text-blue-900" />
+                    <Building className="w-8 h-8 mb-2 text-[#002e6d]" />
                     <span>Bank Transfer</span>
                     <span className="text-xs text-gray-500 mt-1">
                       Coming Soon
@@ -137,8 +144,8 @@ const Donate = () => {
 
                 {/* MTN Mobile Money Details */}
                 {paymentMethod === "mtn" && (
-                  <div className="mt-6 p-6 bg-orange-50 rounded-lg border-2 border-orange-200">
-                    <h3 className="text-xl font-semibold text-blue-900 mb-4">
+                  <div className="mt-6 rounded-2xl border border-[#002e6d]/15 bg-[#002e6d]/5 p-6">
+                    <h3 className="text-xl font-semibold text-[#002e6d] mb-4">
                       MTN Mobile Money Transfer Details
                     </h3>
                     <div className="space-y-4">
@@ -150,7 +157,7 @@ const Donate = () => {
                           <p className="font-semibold text-gray-900">
                             {contact.name}
                           </p>
-                          <p className="text-blue-900 font-mono text-lg">
+                          <p className="text-[#002e6d] font-mono text-lg">
                             {contact.number}
                           </p>
                         </div>
@@ -168,29 +175,32 @@ const Donate = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-orange-500 text-white px-6 py-2 rounded-full text-base font-semibold hover:bg-orange-600 transition-all transform hover:scale-105"
+                className="w-full rounded-full bg-[#ffe600] px-6 py-3 text-sm font-semibold text-[#002e6d] transition-colors hover:bg-[#fff36a]"
               >
                 Complete Donation
               </button>
+              {notice && (
+                <p className="text-sm leading-relaxed text-gray-600">{notice}</p>
+              )}
             </form>
           </div>
 
           {/* Impact Information */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-20">
+          <div className="mt-16 mb-28 grid grid-cols-1 gap-8 text-center sm:mb-32 md:grid-cols-3">
             <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">$25</h3>
+              <h3 className="text-xl font-semibold text-[#002e6d] mb-2">$25</h3>
               <p className="text-gray-600">
                 Provides one therapy session for a refugee
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">$100</h3>
+              <h3 className="text-xl font-semibold text-[#002e6d] mb-2">$100</h3>
               <p className="text-gray-600">
                 Supports mental health training for a community worker
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">$250</h3>
+              <h3 className="text-xl font-semibold text-[#002e6d] mb-2">$250</h3>
               <p className="text-gray-600">
                 Funds a month of group therapy sessions
               </p>
@@ -198,8 +208,6 @@ const Donate = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
   );
 };
 

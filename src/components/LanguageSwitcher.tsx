@@ -25,29 +25,33 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ isScrolled }) => {
   return (
     <div className="relative">
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-1.5 px-2 py-1 rounded-full text-sm transition-all ${
-          isScrolled 
-            ? 'bg-gray-100 text-gray-700 hover:bg-gray-200' 
-            : 'bg-white/10 text-white hover:bg-white/20'
+        aria-label="Change language"
+        aria-expanded={isOpen}
+        className={`lang-btn ${
+          isScrolled
+            ? "border-[#002e6d]/15 bg-white text-[#002e6d] hover:bg-[#002e6d]/5"
+            : "border-white/25 bg-white/10 text-white hover:bg-white/15"
         }`}
       >
-        <Globe className="w-4 h-4" />
-        <span className="text-sm">
-          {languages.find(lang => lang.code === i18n.language)?.code.toUpperCase() || 'EN'}
+        <Globe className="h-3.5 w-3.5" />
+        <span>
+          {languages.find(lang => lang.code === i18n.language)?.code.toUpperCase() || "EN"}
         </span>
       </button>
 
       {isOpen && (
-        <div className="absolute top-full mt-1 right-0 bg-white rounded-lg shadow-xl border border-gray-100 py-1 min-w-[140px] z-50">
+        <div className="lang-menu absolute right-0 top-full z-50 mt-2 min-w-[148px] rounded-xl border border-gray-100 bg-white py-1 shadow-lg">
           {languages.map((language) => (
             <button
               key={language.code}
+              type="button"
               onClick={() => handleLanguageChange(language.code)}
-              className={`w-full text-left px-3 py-1.5 text-sm hover:bg-gray-50 transition-colors flex items-center justify-between ${
-                i18n.language === language.code 
-                  ? 'text-[#002e6d] font-medium bg-gray-50' 
-                  : 'text-gray-700'
+              className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm transition-colors hover:bg-gray-50 ${
+                i18n.language === language.code
+                  ? "bg-gray-50 font-medium text-[#002e6d]"
+                  : "text-gray-700"
               }`}
             >
               {language.name}

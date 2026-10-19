@@ -93,8 +93,8 @@ function App() {
               <About />
               <Programs />
               <Impact />
-              <GetInvolved />
               <Team />
+              <GetInvolved />
               <Contact />
             </Layout>
           }

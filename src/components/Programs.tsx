@@ -1,61 +1,69 @@
-import React from 'react';
-import { Brain, Heart, Users, HandHeart, GraduationCap, LineChart } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import {
+  Brain,
+  GraduationCap,
+  HandHeart,
+  Heart,
+  LineChart,
+  Users,
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Programs = () => {
   const { t } = useTranslation();
 
   const programs = [
     {
-      icon: <Brain className="w-12 h-12 text-blue-900" />,
-      title: t('programs.awareness.title'),
-      description: t('programs.awareness.description')
+      icon: Brain,
+      title: t("programs.awareness.title"),
+      description: t("programs.awareness.description"),
     },
     {
-      icon: <Heart className="w-12 h-12 text-blue-900" />,
-      title: t('programs.access.title'),
-      description: t('programs.access.description')
+      icon: Heart,
+      title: t("programs.access.title"),
+      description: t("programs.access.description"),
     },
     {
-      icon: <HandHeart className="w-12 h-12 text-blue-900" />,
-      title: t('programs.trauma.title'),
-      description: t('programs.trauma.description')
+      icon: HandHeart,
+      title: t("programs.trauma.title"),
+      description: t("programs.trauma.description"),
     },
     {
-      icon: <GraduationCap className="w-12 h-12 text-blue-900" />,
-      title: t('programs.youth.title'),
-      description: t('programs.youth.description')
+      icon: GraduationCap,
+      title: t("programs.youth.title"),
+      description: t("programs.youth.description"),
     },
     {
-      icon: <LineChart className="w-12 h-12 text-blue-900" />,
-      title: t('programs.research.title'),
-      description: t('programs.research.description')
+      icon: LineChart,
+      title: t("programs.research.title"),
+      description: t("programs.research.description"),
     },
     {
-      icon: <Users className="w-12 h-12 text-blue-900" />,
-      title: t('programs.support.title'),
-      description: t('programs.support.description')
-    }
+      icon: Users,
+      title: t("programs.support.title"),
+      description: t("programs.support.description"),
+    },
   ];
 
   return (
-    <section id="programs" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">{t('programs.title')}</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {programs.map((program, index) => (
-            <div 
-              key={index}
-              className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all"
+    <section id="programs" className="bg-gray-50 py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 className="mb-14 text-center text-3xl font-bold text-gray-900 sm:mb-16">
+          {t("programs.title")}
+        </h2>
+
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {programs.map((program) => (
+            <div
+              key={program.title}
+              className="rounded-2xl border border-gray-200 bg-white p-6"
             >
-              <div className="flex justify-center mb-6">
-                {program.icon}
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#002e6d]/5 text-[#002e6d]">
+                <program.icon className="h-5 w-5" />
               </div>
-              <h3 className="text-xl font-semibold text-center text-blue-900 mb-4">
+              <h3 className="mb-2 text-lg font-semibold text-[#002e6d]">
                 {program.title}
               </h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-sm leading-relaxed text-gray-600">
                 {program.description}
               </p>
             </div>

@@ -1,53 +1,52 @@
-import React from 'react';
-import { Brain, Heart, Users, Activity } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { Activity, Brain, Heart, Users } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Stats = () => {
   const { t } = useTranslation();
 
   const stats = [
     {
-      icon: <Brain className="w-8 h-8 text-blue-900" />,
-      title: t('stats.crisis.title'),
-      description: t('stats.crisis.description')
+      icon: Brain,
+      title: t("stats.crisis.title"),
+      description: t("stats.crisis.description"),
     },
     {
-      icon: <Heart className="w-8 h-8 text-blue-900" />,
-      title: t('stats.depression.title'),
-      description: t('stats.depression.description')
+      icon: Heart,
+      title: t("stats.depression.title"),
+      description: t("stats.depression.description"),
     },
     {
-      icon: <Activity className="w-8 h-8 text-blue-900" />,
-      title: t('stats.impact.title'),
-      description: t('stats.impact.description')
+      icon: Activity,
+      title: t("stats.impact.title"),
+      description: t("stats.impact.description"),
     },
     {
-      icon: <Users className="w-8 h-8 text-blue-900" />,
-      title: t('stats.community.title'),
-      description: t('stats.community.description')
-    }
+      icon: Users,
+      title: t("stats.community.title"),
+      description: t("stats.community.description"),
+    },
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-          {t('stats.title')}
+    <section className="bg-white py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 className="mb-14 text-center text-3xl font-bold text-gray-900 sm:mb-16">
+          {t("stats.title")}
         </h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, index) => (
-            <div 
-              key={index}
-              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat) => (
+            <div
+              key={stat.title}
+              className="rounded-2xl border border-gray-200 bg-white p-6"
             >
-              <div className="flex justify-center mb-4">
-                {stat.icon}
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#002e6d]/5 text-[#002e6d]">
+                <stat.icon className="h-5 w-5" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 text-center mb-3">
+              <h3 className="mb-2 text-lg font-semibold text-gray-900">
                 {stat.title}
               </h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-sm leading-relaxed text-gray-600">
                 {stat.description}
               </p>
             </div>

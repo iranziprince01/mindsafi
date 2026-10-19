@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 import blog3 from "../assets/blog 3.jpg";
 import blog1 from "../assets/blog1.png";
 import blog2 from "../assets/blog2.jpg";
@@ -50,70 +50,54 @@ By investing in refugee students' education, we strive to change lives and stren
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header with Parallax Effect */}
-      <div className="relative bg-blue-900 text-white py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/90 to-blue-900/70 z-10" />
-        <div className="absolute inset-0 bg-[url('/src/assets/blog1.png')] bg-cover bg-center opacity-20 animate-slow-zoom" />
-        <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-5xl font-bold mb-6 animate-fade-in">
-              Our Stories
-            </h1>
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto animate-fade-in-delay">
-              Discover how we're making a difference in communities across
-              Rwanda
-            </p>
-          </div>
+      <div className="bg-[#002e6d] px-4 pb-24 pt-36 text-white sm:px-6 sm:pb-28 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <h1 className="text-4xl font-bold">Our Stories</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/75">
+            Discover how we're making a difference in communities across Rwanda
+          </p>
         </div>
       </div>
 
       {/* Blog Posts with Enhanced Layout */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 gap-16">
+      <div className="max-w-6xl mx-auto px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+        <div className="grid grid-cols-1 gap-10">
           {blogs.map((blog) => (
             <article
               key={blog.id}
-              className="group bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
+              className="overflow-hidden rounded-2xl border border-gray-200 bg-white"
             >
-              <div className="grid md:grid-cols-2 gap-8">
-                {/* Image Section */}
-                <div className="relative h-[400px] md:h-full overflow-hidden">
+              <div className="grid md:grid-cols-2">
+                <div className="relative min-h-64 md:min-h-full">
                   <img
                     src={blog.image}
                     alt={blog.title}
-                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 </div>
 
-                {/* Content Section */}
-                <div className="p-8 md:p-10 flex flex-col justify-between">
+                <div className="flex flex-col justify-between p-6 sm:p-8">
                   <div>
-                    <div className="flex items-center space-x-4 text-sm text-gray-500 mb-4">
+                    <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-500">
                       <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-2" />
+                        <Calendar className="mr-2 h-4 w-4" />
                         <span>{blog.date}</span>
                       </div>
                       <div className="flex items-center">
-                        <MapPin className="w-4 h-4 mr-2" />
+                        <MapPin className="mr-2 h-4 w-4" />
                         <span>{blog.location}</span>
                       </div>
                     </div>
-                    <h2 className="text-2xl font-bold text-blue-900 mb-6 group-hover:text-orange-500 transition-colors duration-300">
+                    <h2 className="mb-4 text-2xl font-bold text-[#002e6d]">
                       {blog.title}
                     </h2>
-                    <div className="prose prose-lg max-w-none">
+                    <div>
                       {blog.content.split("\n\n").map((paragraph, index) => (
-                        <p key={index} className="mb-4 text-gray-600">
+                        <p key={index} className="mb-4 text-sm leading-relaxed text-gray-600">
                           {paragraph}
                         </p>
                       ))}
                     </div>
-                  </div>
-                  <div className="mt-8 pt-6 border-t border-gray-100">
-                    <button className="inline-flex items-center text-orange-500 font-semibold hover:text-orange-600 transition-colors duration-300">
-                      Read More
-                      <ArrowRight className="w-4 h-4 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" />
-                    </button>
                   </div>
                 </div>
               </div>

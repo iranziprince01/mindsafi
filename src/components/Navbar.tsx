@@ -1,14 +1,16 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
+  const onHero = location.pathname === "/" && !isScrolled;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,8 +64,8 @@ const Navbar = () => {
     { id: "about", label: t("nav.about") },
     { id: "programs", label: t("nav.programs") },
     { id: "impact", label: t("nav.impact") },
-    { id: "get-involved", label: t("nav.getInvolved") },
     { id: "team", label: t("nav.team") },
+    { id: "get-involved", label: t("nav.getInvolved") },
     { id: "blogs", label: "Blogs", isPage: true },
     { id: "contact", label: t("nav.contact") },
   ];
@@ -71,7 +73,11 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md py-4" : "bg-transparent py-6"
+        isScrolled
+          ? "bg-white/95 py-3 shadow-sm backdrop-blur-sm"
+          : onHero
+            ? "border-b border-white/15 bg-white/10 py-3 backdrop-blur-lg"
+            : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -109,31 +115,34 @@ const Navbar = () => {
 
           {/* Desktop Navigation and Actions */}
           <div className="hidden md:flex md:items-center md:justify-end flex-1">
-            <div className="flex items-center justify-center space-x-8">
-              {navItems.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className={`nav-link flex items-center h-full ${
-                    isScrolled ? "scrolled" : ""
-                  }`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (item.isPage) {
-                      navigate(`/${item.id}`);
-                    } else {
-                      handleNavClick(item.id);
-                    }
-                  }}
-                >
-                  {item.label}
-                </a>
-              ))}
-              <div className="flex items-center space-x-6">
+            <div className="flex items-center">
+              <div className="flex items-center gap-0.5">
+                {navItems.map((item) => (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    className={`nav-link flex items-center h-full ${
+                      isScrolled ? "scrolled" : ""
+                    }`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (item.isPage) {
+                        navigate(`/${item.id}`);
+                      } else {
+                        handleNavClick(item.id);
+                      }
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+              <div className="ml-5 flex items-center gap-2">
                 <LanguageSwitcher isScrolled={isScrolled} />
                 <button
+                  type="button"
                   onClick={handleDonateClick}
-                  className="donate-btn flex items-center justify-center"
+                  className="donate-btn"
                 >
                   {t("nav.donate")}
                 </button>
@@ -160,13 +169,13 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 bg-white rounded-lg shadow-lg">
-            <div className="py-2">
+          <div className="md:hidden mt-3 bg-white rounded-2xl shadow-lg border border-gray-100">
+            <div className="p-2">
               {navItems.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className="flex items-center px-4 py-3 text-gray-800 hover:bg-gray-100 transition-colors"
+                  className="flex items-center px-3 py-2 text-sm text-[#002e6d]/80 rounded-lg hover:bg-[#002e6d]/5 hover:text-[#002e6d] transition-colors"
                   onClick={(e) => {
                     e.preventDefault();
                     if (item.isPage) {
@@ -179,11 +188,12 @@ const Navbar = () => {
                   {item.label}
                 </a>
               ))}
-              <div className="px-4 py-3 flex items-center justify-between">
+              <div className="mt-1 flex items-center justify-end gap-2 px-2 py-2">
                 <LanguageSwitcher isScrolled={true} />
                 <button
+                  type="button"
                   onClick={handleDonateClick}
-                  className="donate-btn flex items-center justify-center"
+                  className="donate-btn"
                 >
                   {t("nav.donate")}
                 </button>
